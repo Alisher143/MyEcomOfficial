@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "998911279873",
+    "project_id": "ecommerce-9d6f3",
+    "storage_bucket": "ecommerce-9d6f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998911279873:android:9f36905f9b69f98442d100",
+        "android_client_info": {
+          "package_name": "com.muhsanapps.ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8xrjapo45DiSmDE-kfoeR_M411vZV57o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
