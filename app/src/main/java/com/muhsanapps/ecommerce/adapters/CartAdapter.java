@@ -1,5 +1,6 @@
 package com.muhsanapps.ecommerce.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -44,6 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return new CartViewHolder(LayoutInflater.from(context).inflate(R.layout.item_cart, parent, false));
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
 
@@ -53,7 +55,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .into(holder.binding.imageView2);
 
         holder.binding.productName.setText(product.getName());
-        holder.binding.price.setText("PKR " + product.getPrice());
+        holder.binding.price.setText("INR " + product.getPrice());
         holder.binding.quantity.setText(product.getQuantity() + " item(s)");
 
         holder.itemView.setOnClickListener(view -> {

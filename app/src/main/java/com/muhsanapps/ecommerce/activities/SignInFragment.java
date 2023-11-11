@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class SignInFragment extends Fragment {
     private EditText email, password;
     private Button signInBtn;
     private ProgressBar progressBar;
+    private ImageButton closeBtn;
 
     private FirebaseAuth firebaseAuth;
     private String emailPattern="[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
@@ -61,6 +63,7 @@ public class SignInFragment extends Fragment {
         email = view.findViewById(R.id.sign_in_email);
         password = view.findViewById(R.id.sign_in_password);
         signInBtn = view.findViewById(R.id.sign_in_btn);
+        closeBtn = view.findViewById(R.id.sign_in_closeBtn);
         progressBar = view.findViewById(R.id.sign_in_progressbar);
         firebaseAuth = FirebaseAuth.getInstance();
         return view;
@@ -72,6 +75,7 @@ public class SignInFragment extends Fragment {
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
         signInBtn.setOnClickListener(v -> checkEmailAndPassword());
+        closeBtn.setOnClickListener(v -> mainIntent());
     }
         private TextWatcher textWatcher = new TextWatcher() {
             @Override

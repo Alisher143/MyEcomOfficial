@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +28,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.muhsanapps.ecommerce.R;
-import com.muhsanapps.ecommerce.activities.SignInFragment;
+//import com.muhsanapps.ecommerce.activities.SignInFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +45,7 @@ public class SignUpFragment extends Fragment {
     private Button signUpBtn;
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
+    private ImageButton closeBtn;
     private FirebaseFirestore firebaseFirestore;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
 
@@ -64,6 +67,7 @@ public class SignUpFragment extends Fragment {
         password = view.findViewById(R.id.sign_up_password);
         confirmPassword = view.findViewById(R.id.sign_up_confirm_password);
         signUpBtn = view.findViewById(R.id.sign_up_btn);
+        closeBtn = view.findViewById(R.id.sign_up_closeBtn);
         progressBar = view.findViewById(R.id.sign_up_progressbar);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -74,21 +78,13 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        alreadyHaveAnAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                setFragment(new SignInFragment());
-            }
-        });
-
-        // ... (other onViewCreated code)
-
+        alreadyHaveAnAccount.setOnClickListener(v -> setFragment(new SignInFragment()));
         email.addTextChangedListener(textWatcher);
         fullName.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
         confirmPassword.addTextChangedListener(textWatcher);
         signUpBtn.setOnClickListener(v -> checkEmailAndPassword());
+        closeBtn.setOnClickListener(v -> mainIntent());
     }
 
     private void setFragment(Fragment fragment) {
@@ -128,7 +124,8 @@ public class SignUpFragment extends Fragment {
     }
 
     private void checkEmailAndPassword() {
-        Drawable customErrorIcon = getResources().getDrawable(R.mipmap.custom_error_icon);
+        Drawable customErrorIcon = getResources().getDrawable(R.mipmap.custom_error_icon, requireContext().getTheme());
+
         customErrorIcon.setBounds(0, 0, customErrorIcon.getIntrinsicWidth(), customErrorIcon.getIntrinsicHeight());
         if (email.getText().toString().matches(emailPattern)) {
             if (password.getText().toString().equals(confirmPassword.getText().toString())) {
