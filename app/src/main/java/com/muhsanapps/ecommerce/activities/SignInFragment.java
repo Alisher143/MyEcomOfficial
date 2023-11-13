@@ -28,11 +28,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.muhsanapps.ecommerce.R;
-//import com.google.firebase.firestore.DocumentReference;
-
-
-//import java.util.HashMap;
-//import java.util.Map;
 
 
 
@@ -46,12 +41,14 @@ public class SignInFragment extends Fragment {
     private TextView dontHaveAnAccount;
     private FrameLayout parentFrameLayout;
     private EditText email, password;
+
+    private TextView forgotPassword;
     private Button signInBtn;
     private ProgressBar progressBar;
     private ImageButton closeBtn;
 
     private FirebaseAuth firebaseAuth;
-    private String emailPattern="[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
+    private String emailPattern="[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
 
 
     @Override
@@ -64,6 +61,7 @@ public class SignInFragment extends Fragment {
         password = view.findViewById(R.id.sign_in_password);
         signInBtn = view.findViewById(R.id.sign_in_btn);
         closeBtn = view.findViewById(R.id.sign_in_closeBtn);
+        forgotPassword = view.findViewById(R.id.sign_in_forgot_password);
         progressBar = view.findViewById(R.id.sign_in_progressbar);
         firebaseAuth = FirebaseAuth.getInstance();
         return view;
@@ -72,6 +70,7 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dontHaveAnAccount.setOnClickListener(v -> setFragment(new SignUpFragment()));
+        forgotPassword.setOnClickListener(v -> setFragment(new ResetPasswordFragment()));
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
         signInBtn.setOnClickListener(v -> checkEmailAndPassword());
